@@ -1,0 +1,234 @@
+<html>
+  <head>
+    <title>Sticky Notes</title>
+    <style type="text/css">
+ body {
+  background-color: grey;
+  position: relative;
+}
+
+.odd_note {
+  background-color: #FFFF66;
+  padding: 10px;
+  transition: transform 0.2s;
+  width: 200px;
+  height: 200px;
+  margin: 10;
+  float: left;
+  transform: rotate(-4deg);
+}
+
+.even_note {
+  background-color: #98FB98;
+  padding: 10px;
+  transition: transform 0.2s;
+  width: 200px;
+  height: 200px;
+  margin: 10;
+  float: left;
+  transform: rotate(4deg);
+}
+
+.odd_note:hover {
+  transform: scale(1.1);
+  box-shadow: 5px 5px gray;
+}
+
+.even_note:hover {
+  transform: scale(1.1);
+  box-shadow: 5px 5px gray;
+}
+.note_title {
+  font-family: cursive;
+}
+
+.odd_textarea {
+  font-family: Garamond;
+  font-size: medium;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+  background-color: #FFFF66;
+  resize: none;
+  text-align: left;
+}
+
+.odd_textarea:focus {
+  outline: none;
+}
+
+.even_textarea {
+  font-family: Garamond;
+  font-size: medium;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+  background-color: #98FB98;
+  resize: none;
+}
+
+.even_textarea:focus {
+  outline: none;
+}
+
+.new_note {
+  right: 20;
+  bottom: 20;
+  position: absolute;
+}
+
+.delete-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.delete-icon:hover {
+  transform: scale(1.5);
+  opacity: 0.5;
+}
+#add_note_image {
+  bottom: 10px;
+  right: 10px;
+}
+#add_note_image:hover {
+  transform: scale(1.2);
+}
+	
+ </style>
+    <script type="text/javascript">
+ var count = 6; //there are 5 notes initially. Start adding from note 6
+
+//inserting a new note
+function addNewNote() {
+  var newNote_title = document.createElement("p");
+  newNote_title.className = "note_title";
+  newNote_title.innerHTML = "Note #" + count;
+  var newNote_textarea = document.createElement("textarea");
+  newNote_textarea.setAttribute("rows", "8");
+  newNote_textarea.setAttribute("cols", "25");
+  //delete icon
+  var deleteIcon = document.createElement("img");
+  deleteIcon.setAttribute("src", "dustbin.png");
+  deleteIcon.setAttribute("height","30");
+  deleteIcon.setAttribute("alt", "Delete Note");
+  deleteIcon.className = "delete-icon";
+
+  //when clicked, must delete the note
+  deleteIcon.addEventListener("click", function () {
+    var note = this.parentNode;
+    note.parentNode.removeChild(note);
+  });
+
+  var newNote = document.createElement("div");
+
+  if (count % 2 != 0) {
+    newNote.className = "odd_note";
+    newNote_textarea.className = "odd_textarea";
+  } else {
+    newNote.className = "even_note";
+    newNote_textarea.className = "even_textarea";
+  }
+
+  newNote.appendChild(newNote_title); //title of note
+  newNote.appendChild(newNote_textarea); //textarea
+  newNote.appendChild(deleteIcon); //delete image
+  document.body.appendChild(newNote); //inserting this note in the body of webpage
+
+  count++;
+}
+
+//function to delete note; for initial notes
+function deleteNote(note) {
+  note.parentNode.removeChild(note);
+}
+ </script>
+  </head>
+  <body>
+    <div class="odd_note" id="note1">
+      <p>
+        <span class="note_title"> Note #1 </span>
+      </p>
+      <textarea rows="8" cols="25" class="odd_textarea" id="input_note">
+      </textarea>
+      <img
+        src="dustbin.png"
+        alt="Delete Note"
+        class="delete-icon"
+        onclick="deleteNote(note1)"
+  height="30"
+      />
+    </div>
+    <div class="even_note" id="note2">
+      <p>
+        <span class="note_title"> Note #2 </span>
+      </p>
+      <textarea rows="8" cols="25" class="even_textarea" id="input_note">
+   </textarea
+      >
+      <img
+        src="dustbin.png"
+        alt="Delete Note"
+        class="delete-icon"
+        onclick="deleteNote(note2)"
+  height="30"
+      />
+    </div>
+    <div class="odd_note" id="note3">
+      <p>
+        <span class="note_title"> Note #3 </span>
+      </p>
+      <textarea rows="8" cols="25" class="odd_textarea" id="input_note"> 
+     </textarea
+      >
+      <img
+        src="dustbin.png"
+        alt="Delete Note"
+        class="delete-icon"
+        onclick="deleteNote(note3)"
+  height="30"
+      />
+    </div>
+    <div class="even_note" id="note4">
+      <p>
+        <span class="note_title"> Note #4 </span>
+      </p>
+      <textarea rows="8" cols="25" class="even_textarea" id="input_note">
+   </textarea
+      >
+      <img
+        src="dustbin.png"
+        alt="Delete Note"
+        class="delete-icon"
+        onclick="deleteNote(note4)"
+  height="30"
+      />
+    </div>
+    <div class="odd_note" id="note5">
+      <p>
+        <span class="note_title"> Note #5 </span>
+      </p>
+      <textarea rows="8" cols="25" class="odd_textarea" id="input_note"> 
+   </textarea
+      >
+      <img
+        src="dustbin.png"
+        alt="Delete Note"
+        class="delete-icon"
+        onclick="deleteNote(note5)"
+  height="30"
+      />
+    </div>
+    <!-- button to add new notes -->
+    <div class="new_note">
+      <img
+        id="add_note_image"
+        src="plus.png"
+        height="50"
+        onclick="addNewNote()"
+      />
+    </div>
+  </body>
+</html>
